@@ -3,6 +3,7 @@ package startup
 import (
 	"fmt"
 	"github.com/sirupsen/logrus"
+	"os"
 )
 
 func install() {
@@ -12,6 +13,7 @@ func install() {
 	installHealth()
 	checkHealth()
 	installComplete()
+	os.Exit(0)
 
 }
 
