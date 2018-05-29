@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
-   "github.com/gorilla/mux"
-	log "github.com/sirupsen/logrus"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/startup"
+	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 )
 
 const port = 8080
