@@ -2,24 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 )
 
 const port = 8080
 
 func main() {
 
-	pingFunction()
-}
-
-func pingFunction() {
-	fmt.Println("Hello World")
+	log.Info("Starting")
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/api/ping", api.CORSHandler(api.Ping)).Methods("GET", "OPTIONS")
+	router.HandleFunc("/api/health", api.CORSHandler(api.Health)).Methods("GET", "OPTIONS")
 	log.Fatal(http.ListenAndServe(fmt.Sprint(":", port), router))
-	return
 }
