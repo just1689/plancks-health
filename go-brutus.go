@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"git.amabanana.com/plancks-cloud/pc-go-daemon/api"
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
 	"github.com/gorilla/mux"
 )
 
