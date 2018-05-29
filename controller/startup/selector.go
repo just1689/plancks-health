@@ -6,8 +6,13 @@ import (
 	"syscall"
 )
 
+//ModeField is the env field used to tell the this app what to do on startup
 const ModeField = "MODE"
+
+//ModeInstall will go about setting up this app as a service.
 const ModeInstall = "INSTALL"
+
+//ModeNormal is the day-to-day normal way of operating. This app will run as Normal most of the time.
 const ModeNormal = "NORMAL"
 
 func Init() {
