@@ -8,7 +8,7 @@ import (
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/db"
 )
 
-func Ping(w http.ResponseWriter, _ *http.Request) {
+func Health(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(db.HealthCheck())
 }

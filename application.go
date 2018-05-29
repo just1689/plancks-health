@@ -1,13 +1,21 @@
 package main
 
-import "git.amabanana.com/plancks-cloud/pc-go-brutus/controller/startup"
+import (
+	"fmt"
+	"net/http"
+
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
+	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
+)
+
+const port = 8080
 
 func main() {
 
-	//Start the web server
-	// TODO: start the web server
-
-	//This figures out whether it's normal start or a install start
-	startup.Init()
-	
+	log.Info("Starting")
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/api/health", api.CORSHandler(api.Health)).Methods("GET", "OPTIONS")
+	log.Fatal(http.ListenAndServe(fmt.Sprint(":", port), router))
+	//This (log.Fatal) is a blocking call, no code beneath here will call
 }
