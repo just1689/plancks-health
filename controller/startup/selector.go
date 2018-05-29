@@ -2,7 +2,7 @@ package startup
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"syscall"
 )
 
@@ -27,7 +27,7 @@ func Init() {
 func findMode() string {
 	mode, found := syscall.Getenv(ModeField)
 	if !found {
-		logrus.Error(fmt.Sprintf("Could not find a mode. Shutting down."))
+		log.Error(fmt.Sprintf("Could not find a mode. Shutting down."))
 		panic(0)
 	}
 	return mode

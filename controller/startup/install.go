@@ -2,7 +2,7 @@ package startup
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 func install() {
@@ -17,29 +17,29 @@ func install() {
 
 //welcomeUser tells the user what is about to happen
 func welcomeUser() {
-	logrus.Infoln(fmt.Sprintf("Welcome to the Planck's Cloud installer."))
+	log.Info(fmt.Sprintf("Welcome to the Planck's Cloud installer."))
 }
 
 //install network tries to setup pc-net and tells the user if it succeeded
 func installNetwork() {
-	logrus.Infoln(fmt.Sprintf(".. Attempting to create overlay network"))
+	log.Info(fmt.Sprintf(".. Attempting to create overlay network"))
 	//Create network call
 	//if err != nil {
 	//	logrus.Error(fmt.Sprintf("Failed to create overlay network. Install failed. Shutting down."))
 	//	panic(0)
 	//}
-	logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
+	log.Info(fmt.Sprintf(".. ✅ Success"))
 }
 
 //installHealth starts the Health docker image as service on the pc-net network and tells the user if it worked out
 func installHealth() {
-	logrus.Infoln(fmt.Sprintf(".. Attempting to install health service"))
+	log.Info(fmt.Sprintf(".. Attempting to install health service"))
 	//Install health service
 	//if err != nil {
 	//	logrus.Error(fmt.Sprintf("Failed to install health service. Install failed. Shutting down."))
 	//	panic(0)
 	//}
-	logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
+	log.Info(fmt.Sprintf(".. ✅ Success"))
 
 }
 
@@ -53,5 +53,5 @@ func checkHealth() {
 }
 
 func installComplete() {
-	logrus.Infoln(fmt.Sprintf("The installation completed succesfully."))
+	log.Info(fmt.Sprintf("The installation completed succesfully."))
 }
