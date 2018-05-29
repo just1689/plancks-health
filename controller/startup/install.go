@@ -11,6 +11,7 @@ func install() {
 	installNetwork()
 	installHealth()
 	checkHealth()
+	installComplete()
 
 }
 
@@ -49,4 +50,8 @@ func checkHealth() {
 	// Tell the user to navigate there in their browser.
 	// Freak out if it failed.
 
+}
+
+func installComplete() {
+	logrus.Infoln(fmt.Sprintf("The installation completed succesfully."))
 }
