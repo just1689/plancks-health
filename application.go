@@ -17,4 +17,5 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/api/health", api.CORSHandler(api.Health)).Methods("GET", "OPTIONS")
 	log.Fatal(http.ListenAndServe(fmt.Sprint(":", port), router))
+	//This (log.Fatal) is a blocking call, no code beneath here will call
 }
