@@ -27,19 +27,20 @@ func welcomeUser() {
 func installNetwork() {
 	logrus.Infoln(fmt.Sprintf(".. Attempting to create overlay network"))
 	exists, err := docker.CheckNetworkExists("pc-net")
-	if err != nil{
+	if err != nil {
 		logrus.Fatalln("Could not check if the network exists")
 	}
 
 	if !exists {
-	success, err := docker.CreateOverlayNetwork("pc-net")
+		success, err := docker.CreateOverlayNetwork("pc-net")
 
-	if err != nil{
-		logrus.Fatalln("Could not check if the network exists")
-	}
+		if err != nil {
+			logrus.Fatalln("Could not check if the network exists")
+		}
 
-	if !success {
-		logrus.Fatalln("Create network was not successful")
+		if !success {
+			logrus.Fatalln("Create network was not successful")
+		}
 	}
 
 	logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
