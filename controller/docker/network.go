@@ -36,26 +36,7 @@ func CreateOverlayNetwork(name string) (success bool, err error) {
 
 //CheckNetworkExists tells us if a network name exists
 func CheckNetworkExists(name string) (exists bool, err error) {
-	cli, err := client.NewEnvClient()
-	ctx := context.Background()
-	if err != nil {
-		log.Panicln(fmt.Sprintf("Error getting docker client environment: %s", err))
-		return false, err
-	}
-	list, err := cli.NetworkList(ctx, types.NetworkListOptions{})
-	if len(list) == 0 {
-		exists = false
-		return
-	}
-
-	for _, network := range list {
-		if network.Name == name {
-			exists = true
-			return
-		}
-	}
-
-	exists = false
+	exists, _, err = describeNetwork(name)
 	return
 
 }
@@ -65,25 +46,46 @@ func DeleteNetwork(name string) (success bool, err error) {
 	cli, err := client.NewEnvClient()
 	ctx := context.Background()
 	if err != nil {
-		log.Panicln(fmt.Sprintf("Error getting docker client environment: %s", err))
+		log.Println(fmt.Sprintf("Error getting docker client environment: %s", err))
 		return false, err
+	}
+
+	exists, ID, err := describeNetwork(name)
+	if err != nil {
+		return false, err
+	}
+	if !exists {
+		success = false
+		return
+	}
+	err = cli.NetworkRemove(ctx, ID)
+
+	if err != nil {
+		return false, err
+	}
+	success = true
+	return
+
+}
+
+func describeNetwork(name string) (exists bool, ID string, err error) {
+	cli, err := client.NewEnvClient()
+	ctx := context.Background()
+	if err != nil {
+		log.Panicln(fmt.Sprintf("Error getting docker client environment: %s", err))
+		return false, "", err
 	}
 
 	list, err := cli.NetworkList(ctx, types.NetworkListOptions{})
 	if len(list) == 0 {
-		success = false
-		return
+		return false, "", err
 	}
 
 	for _, network := range list {
 		if network.Name == name {
-			cli.NetworkRemove(ctx, network.ID)
-			success = true
-			return
+			return true, network.ID, err
 		}
 	}
-
-	success = false
+	exists = false
 	return
-
 }
