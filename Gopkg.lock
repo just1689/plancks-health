@@ -94,7 +94,7 @@
     "internal/socks",
     "proxy"
   ]
-  revision = "9ef9f5bb98a1fdc41f8cf6c250a4404b4085e389"
+  revision = "1e491301e022f8f977054da4c2d852decd59571f"
 
 [[projects]]
   branch = "master"
@@ -108,6 +108,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7a36e10af7ecc22bbf792afc6402e85db553a34e67c86b471560f15f541067a2"
+  inputs-digest = "4979544c849a8348d37ef722fbb19a700a4c7d2c69329750259fb4595e7bd0db"
   solver-name = "gps-cdcl"
   solver-version = 1
