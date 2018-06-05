@@ -9,6 +9,8 @@ import (
 	"log"
 )
 
+const NetworkName = "plancks-net"
+
 //CreateOverlayNetwork creates an overlay network in docker swarm
 func CreateOverlayNetwork(name string) (success bool, err error) {
 	cli, err := client.NewEnvClient()
@@ -46,8 +48,8 @@ func CheckNetworkExists(name string) (exists bool, err error) {
 		return
 	}
 
-	for i := 0; i < len(list); i++ {
-		if list[i].Name == name {
+	for _, network := range list {
+		if network.Name == name {
 			exists = true
 			return
 		}
@@ -73,9 +75,9 @@ func DeleteNetwork(name string) (success bool, err error) {
 		return
 	}
 
-	for i := 0; i < len(list); i++ {
-		if list[i].Name == name {
-			cli.NetworkRemove(ctx, list[i].ID)
+	for _, network := range list {
+		if network.Name == name {
+			cli.NetworkRemove(ctx, network.ID)
 			success = true
 			return
 		}
