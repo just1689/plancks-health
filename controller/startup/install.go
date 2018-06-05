@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/sirupsen/logrus"
 	"os"
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/docker"
 )
 
 func install() {
@@ -25,12 +26,24 @@ func welcomeUser() {
 //install network tries to setup pc-net and tells the user if it succeeded
 func installNetwork() {
 	logrus.Infoln(fmt.Sprintf(".. Attempting to create overlay network"))
-	//Create network call
-	//if err != nil {
-	//	logrus.Error(fmt.Sprintf("Failed to create overlay network. Install failed. Shutting down."))
-	//	panic(0)
-	//}
+	exists, err := docker.CheckNetworkExists("pc-net")
+	if err != nil{
+		logrus.Fatalln("Could not check if the network exists")
+	}
+
+	if !exists {
+	success, err := docker.CreateOverlayNetwork("pc-net")
+
+	if err != nil{
+		logrus.Fatalln("Could not check if the network exists")
+	}
+
+	if !success {
+		logrus.Fatalln("Create network was not successful")
+	}
+
 	logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
+
 }
 
 //installHealth starts the Health docker image as service on the pc-net network and tells the user if it worked out
