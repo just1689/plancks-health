@@ -3,6 +3,7 @@ package startup
 import (
 	"fmt"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/docker"
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/util"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
@@ -75,7 +76,7 @@ func checkHealth() {
 
 		if bytes != nil {
 			answered = true
-			continue
+			break
 		}
 
 		if err != nil {
@@ -88,12 +89,17 @@ func checkHealth() {
 		}
 
 		attempts++
+		if attempts > maxAttempts {
+			break
+		}
+
 	}
 
-	// Call localhost:6108/api/ping to see if it is there.
-	// Loop for up to X seconds where X is few seconds.
-	// Tell the user to navigate there in their browser.
-	// Freak out if it failed.
+	if answered {
+		logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
+	} else {
+		logrus.Fatalln(fmt.Sprintf(".. Was not able to find Health service in %v attampts", maxAttempts))
+	}
 
 }
 
