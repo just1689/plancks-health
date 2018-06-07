@@ -69,8 +69,6 @@ func checkHealth() {
 
 	answered := false
 	attempts := 0
-	maxAttempts := 5
-	sleepTime := 5
 	for !answered {
 		bytes, err := util.GetRequest(url)
 
@@ -81,15 +79,15 @@ func checkHealth() {
 
 		if err != nil {
 			logrus.Error(fmt.Sprintf("Checking the health service faild with an error, %s", err.Error()))
-			if attempts < maxAttempts {
+			if attempts < model.InstallMaxHealthChecks {
 				logrus.Infoln(fmt.Sprintf("Will try again in a few seconds"))
-				time.Sleep(time.Duration(sleepTime) * time.Second)
+				time.Sleep(time.Duration(model.InstallSleepBetweenChecks) * time.Second)
 				continue
 			}
 		}
 
 		attempts++
-		if attempts > maxAttempts {
+		if attempts > model.InstallMaxHealthChecks {
 			break
 		}
 
@@ -98,7 +96,7 @@ func checkHealth() {
 	if answered {
 		logrus.Infoln(fmt.Sprintf(".. ✅ Success"))
 	} else {
-		logrus.Fatalln(fmt.Sprintf(".. Was not able to find Health service in %v attampts", maxAttempts))
+		logrus.Fatalln(fmt.Sprintf(".. Was not able to find Health service in %v attampts", model.InstallMaxHealthChecks))
 	}
 
 }
