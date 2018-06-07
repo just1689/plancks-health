@@ -11,5 +11,3 @@ const InstallMaxHealthChecks = 5
 
 //InstallSleepBetweenChecksis is the number of seconds the app will wait between checking for the health service during install
 const InstallSleepBetweenChecks = 5
-
-

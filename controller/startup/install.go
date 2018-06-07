@@ -5,11 +5,11 @@ import (
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/docker"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/util"
+	"github.com/docker/docker/api/types/mount"
+	"github.com/docker/docker/api/types/swarm"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
-	"github.com/docker/docker/api/types/mount"
-	"github.com/docker/docker/api/types/swarm"
 )
 
 func install() {
