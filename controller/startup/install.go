@@ -62,7 +62,7 @@ func installHealth() {
 
 	service := model.Service{
 		Name:             "pc-health",
-		Image:            "pc-health:latest",
+		Image:            "planckscloud/pc-health:latest",
 		Network:          "plancks-net",
 		RequiredMBMemory: 64,
 		EnvVars:          envVars,
