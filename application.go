@@ -6,9 +6,9 @@ import (
 
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/startup"
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 	"github.com/gorilla/mux"
 	log "github.com/sirupsen/logrus"
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 )
 
 func main() {

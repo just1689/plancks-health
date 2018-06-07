@@ -26,9 +26,9 @@ func CreateService(service *model.Service) {
 		},
 		TaskTemplate: swarm.TaskSpec{
 			ContainerSpec: swarm.ContainerSpec{
-				Image: service.Image,
-				Env: service.EnvVars,
-				Mounts:service.Volume,
+				Image:  service.Image,
+				Env:    service.EnvVars,
+				Mounts: service.Volume,
 			},
 			Resources: &swarm.ResourceRequirements{
 				Limits: &swarm.Resources{
@@ -36,7 +36,7 @@ func CreateService(service *model.Service) {
 				},
 			},
 		},
-		EndpointSpec:&swarm.EndpointSpec{Ports:service.Ports},
+		EndpointSpec: &swarm.EndpointSpec{Ports: service.Ports},
 	}
 
 	_, err = cli.ServiceCreate(
