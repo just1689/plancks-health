@@ -5,6 +5,7 @@ import (
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/docker"
 	"github.com/sirupsen/logrus"
 	"os"
+	"time"
 )
 
 func install() {
@@ -61,6 +62,34 @@ func installHealth() {
 
 //checks that the health service can be contacted in the browser by calling it's health service
 func checkHealth() {
+
+	port := 6111
+	url := fmt.Sprintf("http://localhost:%v", port)
+
+	answered := false
+	attempts := 0
+	maxAttempts := 5
+	sleepTime := 5
+	for !answered {
+		bytes, err := util.GetRequest(url)
+
+		if bytes != nil {
+			answered = true
+			continue
+		}
+
+		if err != nil {
+			logrus.Error(fmt.Sprintf("Checking the health service faild with an error, %s", err.Error()))
+			if attempts < maxAttempts {
+				logrus.Infoln(fmt.Sprintf("Will try again in a few seconds"))
+				time.Sleep(time.Duration(sleepTime) * time.Second)
+				continue
+			}
+		}
+
+		attempts++
+	}
+
 	// Call localhost:6108/api/ping to see if it is there.
 	// Loop for up to X seconds where X is few seconds.
 	// Tell the user to navigate there in their browser.
