@@ -3,6 +3,7 @@ package startup
 import (
 	"fmt"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/docker"
+	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 	"git.amabanana.com/plancks-cloud/pc-go-brutus/util"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -64,8 +65,7 @@ func installHealth() {
 //checks that the health service can be contacted in the browser by calling it's health service
 func checkHealth() {
 
-	port := 6111
-	url := fmt.Sprintf("http://localhost:%v", port)
+	url := fmt.Sprintf("http://localhost:%v", model.AppPort)
 
 	answered := false
 	attempts := 0
