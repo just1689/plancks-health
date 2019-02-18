@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/swarm"
 	"github.com/docker/docker/client"
+	"github.com/plancks-cloud/plancks-health/model"
 	log "github.com/sirupsen/logrus"
 )
 

@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/api"
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/startup"
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/model"
 	"github.com/gorilla/mux"
+	"github.com/plancks-cloud/plancks-health/api"
+	"github.com/plancks-cloud/plancks-health/controller/startup"
+	"github.com/plancks-cloud/plancks-health/model"
 	log "github.com/sirupsen/logrus"
 )
 

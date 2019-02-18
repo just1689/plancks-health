@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"git.amabanana.com/plancks-cloud/pc-go-brutus/controller/db"
+	"github.com/plancks-cloud/plancks-health/controller/db"
 )
 
 func Health(w http.ResponseWriter, _ *http.Request) {
